@@ -34,9 +34,9 @@ import {
   Container,
   ListTree,
   Sliders,
-  Gallery,
   FileWarning,
-  AlertTriangle
+  AlertTriangle,
+  Images
 } from 'lucide-react';
 
 const FORM_ELEMENTS = [
@@ -62,8 +62,8 @@ const FORM_ELEMENTS = [
       { id: 'file-upload', icon: Upload, label: 'File upload', description: 'File upload input' },
       { id: 'multi-file-upload', icon: Upload, label: 'Multi-file upload', description: 'Multi-file upload input' },
       { id: 'image-upload', icon: Image, label: 'Image upload', description: 'File upload with image only' },
-      { id: 'multi-image-upload', icon: Gallery, label: 'Multi-image upload', description: 'Multi-file upload with images only' },
-      { id: 'gallery', icon: Gallery, label: 'Gallery', description: 'Multi-image upload with gallery view' },
+      { id: 'multi-image-upload', icon: Images, label: 'Multi-image upload', description: 'Multi-file upload with images only' },
+      { id: 'gallery', icon: Images, label: 'Gallery', description: 'Multi-image upload with gallery view' },
       { id: 'captcha', icon: FileWarning, label: 'Captcha', description: 'Prevents submission by robots' },
       { id: 'hidden-input', icon: Lock, label: 'Hidden input', description: 'Single line or multiline text area' },
     ],
