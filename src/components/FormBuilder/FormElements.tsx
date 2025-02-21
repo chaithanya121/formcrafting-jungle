@@ -1,13 +1,13 @@
 
 import React from 'react';
-import { Input, TextArea, CheckSquare, ToggleLeft, Calendar, Upload, List } from 'lucide-react';
+import { Type, AlignLeft, CheckSquare, ToggleLeft, Calendar, Upload, List } from 'lucide-react';
 
 const FORM_ELEMENTS = [
   {
     category: 'Basic Fields',
     items: [
-      { id: 'text', icon: Input, label: 'Text Input' },
-      { id: 'textarea', icon: TextArea, label: 'Text Area' },
+      { id: 'text', icon: Type, label: 'Text Input' },
+      { id: 'textarea', icon: AlignLeft, label: 'Text Area' },
       { id: 'checkbox', icon: CheckSquare, label: 'Checkbox' },
       { id: 'toggle', icon: ToggleLeft, label: 'Toggle' },
       { id: 'date', icon: Calendar, label: 'Date Picker' },
