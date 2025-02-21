@@ -8,6 +8,203 @@ interface FormElementPreviewProps {
 const FormElementPreview: React.FC<FormElementPreviewProps> = ({ element }) => {
   const renderElement = () => {
     switch (element.type) {
+      case 'matrix':
+        return (
+          <div className="overflow-x-auto">
+            <table className="min-w-full divide-y divide-gray-200">
+              <thead>
+                <tr>
+                  <th className="px-4 py-2"></th>
+                  {['Option 1', 'Option 2', 'Option 3'].map((header, i) => (
+                    <th key={i} className="px-4 py-2 text-sm text-gray-600">{header}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-200">
+                {['Row 1', 'Row 2', 'Row 3'].map((row, i) => (
+                  <tr key={i}>
+                    <td className="px-4 py-2 text-sm text-gray-600">{row}</td>
+                    {[1, 2, 3].map((_, j) => (
+                      <td key={j} className="px-4 py-2">
+                        <input type="radio" name={`matrix-${i}`} className="w-4 h-4" />
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        );
+
+      case 'matrix-table':
+        return (
+          <div className="overflow-x-auto">
+            <table className="min-w-full divide-y divide-gray-200">
+              <thead>
+                <tr>
+                  <th className="px-4 py-2"></th>
+                  {['Column 1', 'Column 2', 'Column 3'].map((header, i) => (
+                    <th key={i} className="px-4 py-2 text-sm text-gray-600">{header}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-200">
+                {['Row 1', 'Row 2', 'Row 3'].map((row, i) => (
+                  <tr key={i}>
+                    <td className="px-4 py-2 text-sm text-gray-600">{row}</td>
+                    {[1, 2, 3].map((_, j) => (
+                      <td key={j} className="px-4 py-2">
+                        <input type="text" className="w-full px-2 py-1 border rounded" />
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        );
+
+      case 'tabs':
+        return (
+          <div className="space-y-4">
+            <div className="border-b border-gray-200">
+              <nav className="-mb-px flex space-x-8">
+                {['Tab 1', 'Tab 2', 'Tab 3'].map((tab, i) => (
+                  <button
+                    key={i}
+                    className={`py-2 px-1 border-b-2 ${
+                      i === 0 ? 'border-primary text-primary' : 'border-transparent text-gray-500 hover:text-gray-700'
+                    }`}
+                  >
+                    {tab}
+                  </button>
+                ))}
+              </nav>
+            </div>
+            <div className="p-4 border rounded-lg">Tab content area</div>
+          </div>
+        );
+
+      case 'steps':
+        return (
+          <div className="space-y-4">
+            <div className="flex justify-between">
+              {['Step 1', 'Step 2', 'Step 3'].map((step, i) => (
+                <div key={i} className="flex items-center">
+                  <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                    i === 0 ? 'bg-primary text-white' : 'bg-gray-200'
+                  }`}>
+                    {i + 1}
+                  </div>
+                  {i < 2 && (
+                    <div className="w-full h-1 bg-gray-200 mx-2">
+                      <div className={`h-full ${i === 0 ? 'bg-primary' : ''}`} style={{ width: '0%' }}></div>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+            <div className="p-4 border rounded-lg">Step content area</div>
+          </div>
+        );
+
+      case 'grid':
+      case '2-columns':
+      case '3-columns':
+      case '4-columns':
+        const columns = {
+          'grid': 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3',
+          '2-columns': 'grid-cols-2',
+          '3-columns': 'grid-cols-3',
+          '4-columns': 'grid-cols-4'
+        }[element.type];
+        
+        return (
+          <div className={`grid ${columns} gap-4`}>
+            {Array.from({ length: 4 }).map((_, i) => (
+              <div key={i} className="p-4 border rounded-lg bg-gray-50">
+                Column {i + 1}
+              </div>
+            ))}
+          </div>
+        );
+
+      case 'table':
+        return (
+          <div className="overflow-x-auto">
+            <table className="min-w-full divide-y divide-gray-200">
+              <thead>
+                <tr>
+                  {['Header 1', 'Header 2', 'Header 3'].map((header, i) => (
+                    <th key={i} className="px-4 py-2 text-sm text-gray-600">{header}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-200">
+                {Array.from({ length: 3 }).map((_, i) => (
+                  <tr key={i}>
+                    {Array.from({ length: 3 }).map((_, j) => (
+                      <td key={j} className="px-4 py-2 text-sm text-gray-600">
+                        Cell {i + 1}-{j + 1}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        );
+
+      case 'container':
+        return (
+          <div className="p-6 border rounded-lg bg-gray-50">
+            <div className="text-sm text-gray-500">Container Content Area</div>
+          </div>
+        );
+
+      case 'list':
+        return (
+          <div className="space-y-2">
+            {Array.from({ length: 3 }).map((_, i) => (
+              <div key={i} className="p-4 border rounded-lg flex items-center justify-between">
+                <span className="text-sm text-gray-600">List Item {i + 1}</span>
+                <button className="text-red-500 hover:text-red-600">×</button>
+              </div>
+            ))}
+            <button className="w-full p-2 border border-dashed rounded-lg text-gray-500 hover:text-gray-600 hover:border-gray-400">
+              + Add Item
+            </button>
+          </div>
+        );
+
+      case 'nested-list':
+        return (
+          <div className="space-y-2">
+            {Array.from({ length: 2 }).map((_, i) => (
+              <div key={i} className="border rounded-lg">
+                <div className="p-4 border-b bg-gray-50 flex items-center justify-between">
+                  <span className="font-medium">Group {i + 1}</span>
+                  <button className="text-red-500 hover:text-red-600">×</button>
+                </div>
+                <div className="p-4 space-y-2">
+                  {Array.from({ length: 2 }).map((_, j) => (
+                    <div key={j} className="flex items-center justify-between">
+                      <span className="text-sm text-gray-600">Item {j + 1}</span>
+                      <button className="text-red-500 hover:text-red-600">×</button>
+                    </div>
+                  ))}
+                  <button className="w-full p-2 border border-dashed rounded-lg text-gray-500 hover:text-gray-600 hover:border-gray-400">
+                    + Add Item
+                  </button>
+                </div>
+              </div>
+            ))}
+            <button className="w-full p-2 border border-dashed rounded-lg text-gray-500 hover:text-gray-600 hover:border-gray-400">
+              + Add Group
+            </button>
+          </div>
+        );
+
       case 'text':
       case 'email':
       case 'password':
