@@ -1,20 +1,49 @@
 
 import React from 'react';
-import { Type, AlignLeft, CheckSquare, ToggleLeft, Calendar, Upload, List } from 'lucide-react';
+import { 
+  Type, 
+  AlignLeft, 
+  CheckSquare, 
+  ToggleLeft, 
+  Calendar, 
+  Upload, 
+  List,
+  Mail,
+  Lock,
+  Hash,
+  Radio,
+  Link,
+  Phone,
+  Map,
+  Globe
+} from 'lucide-react';
 
 const FORM_ELEMENTS = [
   {
     category: 'Basic Fields',
     items: [
       { id: 'text', icon: Type, label: 'Text Input' },
+      { id: 'number', icon: Hash, label: 'Number' },
+      { id: 'email', icon: Mail, label: 'Email' },
+      { id: 'password', icon: Lock, label: 'Password' },
       { id: 'textarea', icon: AlignLeft, label: 'Text Area' },
       { id: 'checkbox', icon: CheckSquare, label: 'Checkbox' },
-      { id: 'toggle', icon: ToggleLeft, label: 'Toggle' },
-      { id: 'date', icon: Calendar, label: 'Date Picker' },
-      { id: 'file', icon: Upload, label: 'File Upload' },
+      { id: 'radio', icon: Radio, label: 'Radio Group' },
       { id: 'select', icon: List, label: 'Select' },
     ],
   },
+  {
+    category: 'Advanced Fields',
+    items: [
+      { id: 'date', icon: Calendar, label: 'Date Picker' },
+      { id: 'file', icon: Upload, label: 'File Upload' },
+      { id: 'toggle', icon: ToggleLeft, label: 'Toggle' },
+      { id: 'url', icon: Link, label: 'URL Input' },
+      { id: 'phone', icon: Phone, label: 'Phone Input' },
+      { id: 'address', icon: Map, label: 'Address' },
+      { id: 'country', icon: Globe, label: 'Country Select' },
+    ],
+  }
 ];
 
 interface FormElementsProps {
@@ -24,7 +53,7 @@ interface FormElementsProps {
 const FormElements: React.FC<FormElementsProps> = ({ onSelectElement }) => {
   return (
     <div className="h-full overflow-y-auto p-4">
-      <div className="sticky top-0 bg-white pb-4">
+      <div className="sticky top-0 bg-white pb-4 z-10">
         <h2 className="text-lg font-semibold text-gray-900">Form Elements</h2>
         <div className="mt-2">
           <input
@@ -44,6 +73,10 @@ const FormElements: React.FC<FormElementsProps> = ({ onSelectElement }) => {
                 key={item.id}
                 onClick={() => onSelectElement(item.id)}
                 className="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-50 transition-colors border border-gray-100 hover:border-primary/20 group"
+                draggable
+                onDragStart={(e) => {
+                  e.dataTransfer.setData('application/json', JSON.stringify(item));
+                }}
               >
                 <item.icon className="w-5 h-5 text-gray-400 group-hover:text-primary transition-colors" />
                 <span className="text-sm text-gray-600 group-hover:text-gray-900 transition-colors">

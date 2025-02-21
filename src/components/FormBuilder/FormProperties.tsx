@@ -40,13 +40,34 @@ const FormProperties: React.FC<FormPropertiesProps> = ({ selectedElement }) => {
             </div>
 
             <div className="space-y-2">
+              <label className="text-sm font-medium text-gray-700">Required</label>
+              <div className="flex items-center space-x-2">
+                <input
+                  type="checkbox"
+                  className="w-4 h-4 border border-gray-300 rounded focus:ring-2 focus:ring-primary"
+                />
+                <span className="text-sm text-gray-600">Make this field required</span>
+              </div>
+            </div>
+
+            <div className="space-y-2">
               <label className="text-sm font-medium text-gray-700">Validation</label>
               <select className="w-full px-3 py-2 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary">
                 <option value="">None</option>
                 <option value="required">Required</option>
                 <option value="email">Email</option>
                 <option value="number">Number</option>
+                <option value="regex">Custom Pattern</option>
               </select>
+            </div>
+
+            <div className="space-y-2">
+              <label className="text-sm font-medium text-gray-700">Custom Classes</label>
+              <input
+                type="text"
+                className="w-full px-3 py-2 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
+                placeholder="Add custom CSS classes"
+              />
             </div>
           </div>
         </div>
