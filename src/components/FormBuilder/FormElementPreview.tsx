@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { FormElementType } from './types';
 
@@ -110,11 +109,17 @@ const FormElementPreview: React.FC<FormElementPreviewProps> = ({ element }) => {
       case 'range-slider':
       case 'vertical-slider':
         return (
-          <input 
-            type="range"
-            className={`w-full ${element.type === 'vertical-slider' ? 'h-32' : ''}`}
-            orient={element.type === 'vertical-slider' ? 'vertical' : 'horizontal'}
-          />
+          <div className={element.type === 'vertical-slider' ? 'h-32 w-full flex items-center justify-center' : 'w-full'}>
+            <input 
+              type="range"
+              className={`
+                ${element.type === 'vertical-slider' 
+                  ? 'rotate-270 origin-center w-32 -translate-y-4' 
+                  : 'w-full'
+                }
+              `}
+            />
+          </div>
         );
       case 'file-upload':
       case 'multi-file-upload':
